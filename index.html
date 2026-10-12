@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="Rahul Balakrishnan — iOS Engineer specialising in Swift, fintech, mobile security and privacy-first applications.">
+  <title>Rahul Balakrishnan — iOS Engineer</title>
+  <style>
+    :root{
+      --bg:#09090d;--surface:#111119;--surface2:#171722;--line:#2b2937;
+      --text:#f5f2fa;--muted:#aaa5b7;--accent:#b69af4;--accent2:#8f70d9;
+      --green:#9ee5bd;--max:1080px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    a:hover{color:var(--accent)}
+    img{max-width:100%;display:block}
+    .wrap{width:min(var(--max),calc(100% - 44px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(9,9,13,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+    nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-weight:800;letter-spacing:-.04em;font-size:18px}
+    .navlinks{display:flex;gap:24px;color:var(--muted);font-size:13px}
+    .hero{padding:100px 0 78px;position:relative}
+    .hero:before{content:"";position:absolute;z-index:-1;top:10px;left:32%;width:440px;height:330px;background:radial-gradient(ellipse,rgba(142,103,216,.16),transparent 68%);pointer-events:none}
+    .eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+    h1{font-size:clamp(43px,7.6vw,78px);line-height:1.04;letter-spacing:-.065em;margin:20px 0 22px;max-width:850px}
+    h1 span{color:var(--accent)}
+    .lead{font-size:18px;color:var(--muted);max-width:730px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border:1px solid var(--line);border-radius:9px;font-size:13px;font-weight:700;transition:transform .18s,border-color .18s}
+    .btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+    .btn.primary{background:var(--accent);color:#171020;border-color:var(--accent)}
+    .quickfacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+    .fact{font-size:12px;color:#d3cedd;border:1px solid var(--line);background:rgba(255,255,255,.025);padding:7px 11px;border-radius:999px}
+    section{padding:58px 0}
+    .sectionhead{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:25px}
+    h2{font-size:clamp(27px,4vw,37px);line-height:1.15;letter-spacing:-.045em;margin:8px 0}
+    .sub{color:var(--muted);max-width:640px;margin:8px 0 0;font-size:14px}
+    .project{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#14131d,#0f0f15);overflow:hidden;margin:20px 0 28px}
+    .projecthead{padding:26px 28px 18px;display:flex;align-items:start;justify-content:space-between;gap:18px}
+    .projecttitle{display:flex;align-items:center;gap:14px}
+    .appicon{height:48px;width:48px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#30233f,#1a1723);border:1px solid #4a3b5c;color:var(--accent);font-size:23px;font-weight:850;flex-shrink:0}
+    .appicon.image-icon{object-fit:cover;padding:0;border:1px solid rgba(255,255,255,.14);background:#111;display:block}
+    h3{margin:0;font-size:23px;letter-spacing:-.035em}
+    .meta{font-size:12px;color:var(--muted);margin-top:3px}
+    .status{font-size:11px;color:var(--green);border:1px solid #2b5a42;background:#10251b;border-radius:999px;padding:5px 9px;white-space:nowrap}
+    .projectintro{padding:0 28px 20px;color:var(--muted);font-size:14px;max-width:830px;margin:0}
+    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0 28px 26px}
+    .shot{
+      margin:0;
+      border:1px solid #34303f;
+      border-radius:12px;
+      overflow:hidden;
+      background:#050507;
+      aspect-ratio:976 / 2048;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:zoom-in;
+    }
+    .shot img{
+      display:block;
+      width:var(--shot-width,100%);
+      height:var(--shot-height,100%);
+      object-fit:contain;
+      transition:transform 220ms ease, opacity 220ms ease;
+      transform:scale(1);
+    }
+    .shot:hover img{
+      transform:scale(1.025);
+      opacity:1;
+    }
+    /* Individual screenshot sizing: tune these values without affecting other images. */
+    .shot.tracklet-dashboard img,
+    .shot.tracklet-overview img,
+    .shot.tracklet-import img,
+    .shot.tracklet-trends img,
+    .shot.tracklet-transactions img,
+    .shot.tracklet-export img,
+    .shot.vaultnotes-lock img,
+    .shot.vaultnotes-list img,
+    .shot.vaultnotes-editor img,
+    .shot.vaultnotes-settings img,
+    .shot.vaultnotes-selection img{width:88%;height:92%;object-fit:contain}
+    .gallery.vault{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .gallery.vault .shot{background:#000}
+
+    .gallery-wrap{position:relative;padding:0 28px 26px}
+    .gallery-wrap .gallery{padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .gallery-wrap .shot{display:flex;width:100%;aspect-ratio:9 / 18;min-width:0}
+    .gallery-wrap .shot img{width:88%;height:92%;object-fit:contain;flex:0 0 auto}
+    /* The Overview capture has less built-in whitespace, so scale it down slightly to match the other screens. */
+    .gallery-wrap .shot.tracklet-overview img{width:80%;height:84%}
+    .gallery-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px}
+    .gallery-nav button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 14px;border:1px solid #3b3548;border-radius:999px;background:#17131f;color:#f6f3fb;font:inherit;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s}
+    .gallery-nav button:hover{background:#282035;border-color:#9d7bea}
+    .gallery-nav button:focus-visible{outline:2px solid #b69af2;outline-offset:3px}
+    .gallery-count{font-size:12px;color:#aaa2b8;min-width:68px;text-align:center}
+    .gallery-nav button:disabled{opacity:.35;cursor:not-allowed}
+
+    .projectbody{border-top:1px solid var(--line);padding:24px 28px 28px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px}
+    .projectbody h4,.case h4{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin:0 0 8px}
+    .projectbody p,.case p,.case li{font-size:13px;color:var(--muted);margin:0}
+    .projectbody ul,.case ul{padding-left:18px;margin:8px 0 0}
+    .projectbody li{font-size:13px;color:var(--muted);margin:5px 0}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}
+    .tag{font-size:11px;color:#d9d1e8;background:#211d2b;border:1px solid #393047;border-radius:6px;padding:4px 8px}
+    .projectlinks{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
+    .textlink{font-size:13px;font-weight:750;color:var(--accent)}
+    .case{margin:0 0 30px;border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--surface)}
+    .casegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .caseblock{padding-right:12px}
+    .caseblock p{margin-top:7px}
+    .skills{display:flex;flex-wrap:wrap;gap:9px}
+    .skill{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 11px;color:#d6d0e0;font-size:12px}
+    .timeline{border-left:1px solid var(--line);margin-left:7px;padding-left:25px}
+    .role{position:relative;margin:0 0 25px}
+    .role:before{content:"";position:absolute;left:-30px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px #211a2b}
+    .role h3{font-size:16px}
+    .role .date{font-size:12px;color:var(--accent);margin:4px 0 7px}
+    .role p{font-size:13px;color:var(--muted);margin:0;max-width:780px}
+    .workprojects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .mini{padding:17px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+    .mini strong{font-size:13px}
+    .mini p{font-size:12px;color:var(--muted);margin:5px 0 0}
+    .education{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .edu{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+    .edu h3{font-size:15px}
+    .edu p{font-size:12px;color:var(--muted);margin:7px 0 0}
+    .contactbox{padding:32px;border:1px solid var(--line);border-radius:16px;background:radial-gradient(ellipse at top right,rgba(182,154,244,.12),transparent 55%),var(--surface)}
+    footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:12px;margin-top:35px}
+    .footrow{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    @media(max-width:720px){
+      .wrap{width:min(var(--max),calc(100% - 30px))}
+      .navlinks{gap:12px;font-size:11px}
+      .hero{padding:72px 0 48px}
+      .sectionhead{display:block}
+      .projecthead{padding:20px 18px 14px}
+      .projectintro{padding:0 18px 18px}
+      .gallery,.gallery.vault{padding:0 18px 20px;gap:9px;grid-template-columns:repeat(2,minmax(0,1fr))}
+      .gallery .shot:last-child{display:flex}
+      .projectbody{padding:20px 18px;grid-template-columns:1fr;gap:20px}
+      .casegrid{grid-template-columns:1fr}
+      .education,.workprojects{grid-template-columns:1fr}
+      .status{white-space:normal;text-align:center}
+    }
+    @media(max-width:420px){.navlinks a:nth-child(3){display:none}h1{letter-spacing:-.05em}.projecthead{gap:8px}.appicon{width:42px;height:42px}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="wrap">
+      <a class="brand" href="#top">RB<span style="color:var(--accent)">.</span></a>
+      <div class="navlinks">
+        <a href="#projects">Projects</a><a href="#skills">Skills</a>
+        <a href="#experience">Experience</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <main id="top" class="wrap">
+    <header class="hero">
+      <div class="eyebrow">iOS Engineer · Fintech · Mobile Security</div>
+      <h1>Building thoughtful<br><span>iOS experiences.</span></h1>
+      <p class="lead">I'm Rahul Balakrishnan, an iOS engineer with 4+ years of professional experience building fintech and consumer applications. I work with Swift, SwiftUI and UIKit, with a particular interest in privacy-first design and secure mobile architecture.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">Explore my projects ↓</a>
+        <a class="btn" href="https://github.com/RahulRR16" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://linkedin.com/in/rahulrr16" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="mailto:rahulrr161996@gmail.com">Contact me ↗</a>
+      </div>
+      <div class="quickfacts">
+        <span class="fact">Fintech product experience</span>
+        <span class="fact">Swift · SwiftUI · UIKit</span>
+        <span class="fact">MSc Cyber Security · UK</span>
+        <span class="fact">International remote teams</span>
+      </div>
+    </header>
+
+    <section id="projects">
+      <div class="sectionhead">
+        <div><div class="eyebrow">Selected work</div><h2>Projects I've built</h2>
+        <p class="sub">A closer look at the products, decisions and engineering behind my independent iOS projects.</p></div>
+      </div>
+
+      <article class="project">
+        <div class="projecthead">
+          <div class="projecttitle"><img class="appicon image-icon" src="images/tracklet-app-icon.png" alt="Tracklet app icon"><div><h3>Tracklet</h3><div class="meta">Personal finance · Cashflow · iOS</div></div></div>
+          <span class="status">Live on App Store</span>
+        </div>
+        <p class="projectintro">An offline-first personal finance app for importing bank statements, tracking transactions and understanding cashflow. Tracklet is designed around local data processing rather than cloud-based financial aggregation.</p>
+        <div class="gallery-wrap" data-gallery="tracklet" data-page="0">
+<div class="gallery">
+          <a class="shot tracklet-dashboard" href="images/tracklet-dashboard.png" target="_blank" rel="noopener" aria-label="Open Tracklet dashboard screenshot"><img src="images/tracklet-dashboard.png" alt="Tracklet dashboard with balance and recent transactions" loading="lazy"></a>
+          <a class="shot tracklet-overview" href="images/tracklet-overview.png" target="_blank" rel="noopener" aria-label="Open Tracklet analytics overview screenshot"><img src="images/tracklet-overview.png" alt="Tracklet spending overview and category chart" loading="lazy"></a>
+          <a class="shot tracklet-trends" href="images/tracklet-trends.png" target="_blank" rel="noopener" aria-label="Open Tracklet spending trends screenshot"><img src="images/tracklet-trends.png" alt="Tracklet spending trends and monthly analytics" loading="lazy"></a>
+          <a class="shot tracklet-transactions" href="images/tracklet-transactions.png" target="_blank" rel="noopener" aria-label="Open Tracklet transactions screenshot"><img src="images/tracklet-transactions.png" alt="Tracklet transaction history grouped by date" loading="lazy"></a>
+          <a class="shot tracklet-import" href="images/tracklet-smart-import.png" target="_blank" rel="noopener" aria-label="Open Tracklet smart import screenshot"><img src="images/tracklet-smart-import.png" alt="Tracklet smart CSV statement import screen" loading="lazy"></a>
+          <a class="shot tracklet-export" href="images/tracklet-export.png" target="_blank" rel="noopener" aria-label="Open Tracklet export screenshot"><img src="images/tracklet-export.png" alt="Tracklet PDF and CSV data export options" loading="lazy"></a>
+        </div>
+          <div class="gallery-nav" aria-label="tracklet screenshot navigation">
+            <button type="button" class="gallery-prev" aria-label="Previous screenshots">← Previous</button>
+            <span class="gallery-count" aria-live="polite">1–3 of 6</span>
+            <button type="button" class="gallery-next" aria-label="Next screenshots">Next →</button>
+          </div>
+        </div>
+        <div class="projectbody">
+          <div><h4>Engineering highlights</h4>
+            <ul>
+              <li>Built local persistence and relationships using SwiftData.</li>
+              <li>Implemented CSV import with column mapping, locale-aware date detection and duplicate detection.</li>
+              <li>Integrated on-device transaction categorisation with Apple's Foundation Models framework.</li>
+              <li>Added biometric access, Keychain-backed passcode protection and local data export.</li>
+            </ul>
+          </div>
+          <div><h4>Technology</h4><p>SwiftUI, SwiftData, Foundation Models, CryptoKit, Keychain Services, LocalAuthentication, Swift Concurrency.</p>
+            <div class="tags"><span class="tag">Offline-first</span><span class="tag">On-device AI</span><span class="tag">Privacy-focused</span></div>
+            <div class="projectlinks">
+              <a class="textlink" href="https://apps.apple.com/us/app/tracklet/id6813167897" target="_blank" rel="noopener">View on App Store ↗</a>
+              <a class="textlink" href="#tracklet-case">Explore case study ↓</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="case" id="tracklet-case">
+        <div class="eyebrow">Case study 01</div><h2 style="font-size:24px">Reliable, Private Statement Imports</h2>
+        <div class="casegrid">
+          <div class="caseblock"><h4>CSV import</h4><p>Built a custom parser with dynamic column mapping and regional date detection to handle varied bank statement formats.</p></div>
+          <div class="caseblock"><h4>Ledger accuracy</h4><p>Added duplicate transaction checks and closing-balance reconciliation to help keep imported records consistent.</p></div>
+          <div class="caseblock"><h4>On-device privacy</h4><p>Processes statement data locally and sanitises transaction descriptions before on-device categorisation with Apple Foundation Models.</p></div>
+        </div>
+        <div class="projectlinks"><a class="textlink" href="https://apps.apple.com/us/app/tracklet/id6813167897" target="_blank" rel="noopener">Open live app ↗</a></div>
+      </div>
+
+      <article class="project">
+        <div class="projecthead">
+          <div class="projecttitle"><img class="appicon image-icon" src="images/vaultnotes-app-icon.png" alt="VaultNotes app icon"><div><h3>VaultNotes</h3><div class="meta">Encrypted notes · Local security · iOS</div></div></div>
+          <span class="status">Available on CodeCanyon</span>
+        </div>
+        <p class="projectintro">A secure, offline-first iOS notes app built with SwiftUI and SwiftData, featuring AES-256 encryption, Face ID/Touch ID, app-specific passcode protection, encrypted local search and PDF export. Published as a source-code product on CodeCanyon.</p>
+        <div class="gallery-wrap" data-gallery="vaultnotes" data-page="0">
+<div class="gallery vault">
+          <a class="shot vaultnotes-list" href="images/vaultnotes-list.png" target="_blank" rel="noopener" aria-label="Open VaultNotes notes list screenshot"><img src="images/vaultnotes-list.png" alt="VaultNotes notes list interface" loading="lazy"></a>
+          <a class="shot vaultnotes-editor" href="images/vaultnotes-editor.png" target="_blank" rel="noopener" aria-label="Open VaultNotes note editor screenshot"><img src="images/vaultnotes-editor.png" alt="VaultNotes note editor interface" loading="lazy"></a>
+          <a class="shot vaultnotes-lock" href="images/vaultnotes-lock.png" target="_blank" rel="noopener" aria-label="Open VaultNotes passcode lock screenshot"><img src="images/vaultnotes-lock.png" alt="VaultNotes passcode lock screen" loading="lazy"></a>
+          <a class="shot vaultnotes-settings" href="images/vaultnotes-settings.png" target="_blank" rel="noopener" aria-label="Open VaultNotes security settings screenshot"><img src="images/vaultnotes-settings.png" alt="VaultNotes security settings with passcode and lock controls" loading="lazy"></a>
+          <a class="shot vaultnotes-selection" href="images/vaultnotes-selection.png" target="_blank" rel="noopener" aria-label="Open VaultNotes note selection screenshot"><img src="images/vaultnotes-selection.png" alt="VaultNotes multi-select notes interface" loading="lazy"></a>
+        </div>
+          <div class="gallery-nav" aria-label="vaultnotes screenshot navigation">
+            <button type="button" class="gallery-prev" aria-label="Previous screenshots">← Previous</button>
+            <span class="gallery-count" aria-live="polite">1–3 of 5</span>
+            <button type="button" class="gallery-next" aria-label="Next screenshots">Next →</button>
+          </div>
+        </div>
+        <div class="projectbody">
+          <div><h4>Engineering highlights</h4>
+            <ul>
+              <li>Implemented cryptographic functionality using CryptoKit.</li>
+              <li>Used Keychain Services for secure storage of sensitive key material.</li>
+              <li>Built local note management and security settings for passcode and biometric access.</li>
+            </ul>
+          </div>
+          <div><h4>Technology</h4><p>Swift, SwiftUI, CryptoKit, Keychain Services and LocalAuthentication.</p>
+            <div class="tags"><span class="tag">Local data</span><span class="tag">Encryption</span><span class="tag">App security</span></div>
+            <div class="projectlinks">
+              <a class="textlink" href="https://codecanyon.net/item/vaultnotes-secure-ios-notes-app-swiftdata-aes256-faceid-offline/61364505" target="_blank" rel="noopener">View on CodeCanyon ↗</a>
+              <a class="textlink" href="#vaultnotes-case">Explore case study ↓</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="case" id="vaultnotes-case">
+        <div class="eyebrow">Case study 02</div><h2 style="font-size:24px">Designing for sensitive personal information</h2>
+        <div class="casegrid">
+          <div class="caseblock"><h4>Goal</h4><p>Keep personal notes accessible to the user while reducing unnecessary exposure of sensitive content.</p></div>
+          <div class="caseblock"><h4>Security design</h4><p>Used CryptoKit for cryptographic operations and Keychain Services for sensitive key material. Access controls include passcode and biometric options.</p></div>
+          <div class="caseblock"><h4>Distribution</h4><p>Published on CodeCanyon as a customizable native iOS source-code project, with documentation and unit tests included.</p></div>
+        </div>
+        <div class="projectlinks"><a class="textlink" href="https://codecanyon.net/item/vaultnotes-secure-ios-notes-app-swiftdata-aes256-faceid-offline/61364505" target="_blank" rel="noopener">View CodeCanyon listing ↗</a></div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="eyebrow">Technical toolkit</div><h2>Tools I use to build</h2>
+      <p class="sub" style="margin-bottom:22px">Native iOS development, maintainable architecture and secure delivery workflows.</p>
+      <div class="skills">
+        <span class="skill">Swift</span><span class="skill">SwiftUI</span><span class="skill">UIKit</span>
+        <span class="skill">MVVM</span><span class="skill">SOLID</span><span class="skill">SwiftData</span>
+        <span class="skill">Core Data</span><span class="skill">Combine</span><span class="skill">Async/Await</span>
+        <span class="skill">REST APIs</span><span class="skill">Alamofire</span><span class="skill">CryptoKit</span>
+        <span class="skill">Keychain</span><span class="skill">LocalAuthentication</span><span class="skill">XCTest</span>
+        <span class="skill">Git</span><span class="skill">GitHub Actions</span><span class="skill">Instruments</span>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="eyebrow">Career</div><h2>Professional experience</h2>
+      <p class="sub" style="margin-bottom:28px">Fintech delivery across distributed teams and international markets.</p>
+      <div class="timeline">
+        <div class="role"><h3>Independent iOS Engineer</h3><div class="date">Dec 2024 – Present · Personal projects</div><p>Building Tracklet and VaultNotes, focusing on privacy-first product design, secure local data processing and modern iOS architecture.</p></div>
+        <div class="role"><h3>iOS + Android Software Engineer · Quantum Metal</h3><div class="date">Jun 2023 – Sep 2023 · Penang, Malaysia (Remote)</div><p>Developed programmatic UIKit interfaces using SnapKit and implemented eKYC onboarding, two-factor authentication, universal links and referral-based registration.</p></div>
+        <div class="role"><h3>iOS Developer · Finalatix Technologies</h3><div class="date">Jul 2021 – May 2023 · Reading, UK (Remote)</div><p>Contributed to 6+ fintech products, led a four-developer team on one project, integrated APIs and supported testing, TestFlight and App Store releases.</p></div>
+        <div class="role"><h3>iOS Developer · Urbansoft Technologies</h3><div class="date">Feb 2019 – Feb 2021 · Chennai, India</div><p>Developed and maintained iOS applications, collaborated across QA and backend teams, and migrated legacy Objective-C components to Swift.</p></div>
+      </div>
+    </section>
+
+    <section id="commercial-projects">
+      <div class="eyebrow">Selected commercial work</div><h2>Fintech & consumer products</h2>
+      <div class="workprojects">
+        <div class="mini"><strong>QMGold · Malaysia</strong><p>Universal links and referral-based registration.</p></div>
+        <div class="mini"><strong>Dosh Wallet · New Zealand</strong><p>Dashboard improvements and invite-a-friend referral flow.</p></div>
+        <div class="mini"><strong>FBN Corporate Banking · Nigeria</strong><p>Dashboard access to balances, transactions and banking services.</p></div>
+        <div class="mini"><strong>E-Pay Wallet · Guyana</strong><p>Registration, KYC verification and account activation.</p></div>
+        <div class="mini"><strong>TRA Connect · Bahrain</strong><p>Internet speed-checking interface with real-time feedback.</p></div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="eyebrow">Education</div><h2>Education & qualifications</h2>
+      <div class="education">
+        <div class="edu"><h3>MSc Cyber Security</h3><p>Northumbria University, UK · 2023–2024<br>Dissertation: Security Threat Detection in iOS Using Machine Learning.</p></div>
+        <div class="edu"><h3>B.Tech Computer Science and Engineering</h3><p>Dr. M.G.R. University, Chennai · 2014–2018</p></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contactbox">
+        <div class="eyebrow">Contact</div><h2>Let's connect.</h2>
+        <p class="sub">I'm interested in iOS engineering opportunities involving fintech, mobile products and secure application development.</p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:rahulrr161996@gmail.com">Email Rahul ↗</a>
+          <a class="btn" href="https://linkedin.com/in/rahulrr16" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn" href="https://github.com/RahulRR16" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <footer><div class="footrow"><span>© 2026 Rahul Balakrishnan</span><span>Designed for clarity · Built for iOS engineering</span></div></footer>
+  </main>
+
+  <script>
+    (() => {
+      const perPage = 3;
+      document.querySelectorAll('.gallery-wrap').forEach((wrap) => {
+        const gallery = wrap.querySelector('.gallery');
+        const shots = Array.from(gallery.querySelectorAll('.shot'));
+        const prev = wrap.querySelector('.gallery-prev');
+        const next = wrap.querySelector('.gallery-next');
+        const count = wrap.querySelector('.gallery-count');
+        let page = 0;
+        const pageCount = Math.max(1, Math.ceil(shots.length / perPage));
+        function render() {
+          const start = page * perPage;
+          const end = Math.min(start + perPage, shots.length);
+          shots.forEach((shot, index) => {
+            shot.style.display = index >= start && index < end ? 'flex' : 'none';
+          });
+          count.textContent = `${start + 1}–${end} of ${shots.length}`;
+          prev.disabled = page === 0;
+          next.disabled = page >= pageCount - 1;
+          wrap.dataset.page = String(page);
+        }
+        prev.addEventListener('click', () => { if (page > 0) { page -= 1; render(); } });
+        next.addEventListener('click', () => { if (page < pageCount - 1) { page += 1; render(); } });
+        render();
+      });
+    })();
+  </script>
+
+</body>
+</html>
